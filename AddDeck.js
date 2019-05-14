@@ -38,4 +38,4 @@ const mapDispatchToprops = (dispatch) => {
         addDeck: (name) => dispatch(createDeck(name))
     }
 }
-export default (AddDeck);
+export default connect({}, mapDispatchToprops)(AddDeck);

@@ -1,3 +1,5 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import Reducer from './reducer';
-export const store = createStore(Reducer);
+export const store = createStore(combineReducers({
+    deckReducer: Reducer
+}));
