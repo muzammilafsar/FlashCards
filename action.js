@@ -8,20 +8,20 @@ export function setLoading(payload) {
         payload
     }
 }
-export function createDeck(payload) {
-    (dispatch) => {
+export const createDeck = (payload) => dispatch => {
+    // (dispatch) => {
         AsyncStorage.getItem('deckList').then(val => {
             if(val ) {
 
-                AsyncStorage.setItem('deckList', [paylaod , ...val])
+                AsyncStorage.setItem('deckList', [payload , ...val])
             } else {
-                AsyncStorage.setItem('deckList', [paylaod])
+                AsyncStorage.setItem('deckList', [payload])
             }
 
         })
-        return {
+        dispatch({
             type: CREATE_DECK,
             payload
-        }
-    }
+        })
+    // }
 }
