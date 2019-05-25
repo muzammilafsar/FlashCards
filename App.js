@@ -1,15 +1,23 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading, Asset, Font, Icon } from 'expo';
+import { Platform, StatusBar, StyleSheet, View, AsyncStorage } from 'react-native';
+import { AppLoading, Asset, Font, Icon,Constants, Notifications, Permissions } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import { Provider} from 'react-redux';
 import { store } from './store';
-
-export default class App extends React.Component {
+import { restoreDeck } from './action';
+import { setLocalNotification, createNotification } from './helper';
+class App extends React.Component {
   state = {
     isLoadingComplete: false,
   };
-
+  componentWillMount() {
+    restoreDeck();
+     
+  }
+  componentDidMount() {
+    setLocalNotification();
+  }
+  
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
@@ -64,3 +72,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+export default (App);

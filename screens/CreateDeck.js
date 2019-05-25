@@ -18,7 +18,7 @@ import { createDeck } from '../action';
 class CreateDeck extends React.Component {
   static navigationOptions = {
     header: null,
-    
+  
   };
 
   state = {
@@ -26,20 +26,15 @@ class CreateDeck extends React.Component {
   }
   createDeck = () => {
         this.props.createDeck(this.state.text);
+        this.props.navigation.navigate('DeckDetail', { id: this.props.decks.length});
   }
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
             <View style={styles.inputContainer}>
                 <TextInput style={styles.input} placeholder={'Deck Name'} value={this.state.text} onChangeText={(text) => this.setState({text})}></TextInput>
-                <TouchableOpacity>
                 <Button onPress={this.createDeck} title="Create">Create</Button>
-                </TouchableOpacity>
             </View>
-        </ScrollView>
-
-        
       </View>
     );
   }
@@ -61,7 +56,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-  }
+    decks: state.deckReducer.decks
+}
 }
 const mapDispatchToProps = dispatch => {
     return {
